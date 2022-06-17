@@ -12,7 +12,7 @@ public class SumDigitsFactorial {
 
     private final Logger logger = LoggerFactory.getLogger(SumDigitsFactorial.class);
 
-    public BigInteger findFactorial(int number) {
+    private BigInteger findFactorial(int number) {
         logger.info("Number to find factorial " + number);
         // Calculating the factorial
         while (number <= 2) {
@@ -30,14 +30,14 @@ public class SumDigitsFactorial {
         return factorial;
     }
 
-    public int findSum(BigInteger factorial) {
+    public int findSum(int number) {
 
-        String number = factorial.toString();
+        String factorial = findFactorial(number).toString();
         int sum = 0;
 
         // Calculating sum of all digits
-        for (int i = 0; i < number.length(); i++) {
-            int digit = (number.charAt(i) - '0');
+        for (int i = 0; i < factorial.length(); i++) {
+            int digit = (factorial.charAt(i) - '0');
             sum = sum + digit;
         }
         return sum;

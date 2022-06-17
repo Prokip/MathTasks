@@ -24,8 +24,7 @@ public class Logic {
 
             System.out.println(System.lineSeparator() + "Please, enter your number to find factorial:");
 
-            System.out.print("SumDigitsFactorial is " + new SumDigitsFactorial().findSum(
-                    new SumDigitsFactorial().findFactorial(scanner.nextInt())));
+            System.out.print("SumDigitsFactorial is " + new SumDigitsFactorial().findSum(scanner.nextInt()));
 
         } catch (NumberException exception) {
             logger.error("Program failed : ", exception);
