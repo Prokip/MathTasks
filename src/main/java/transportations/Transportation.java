@@ -13,18 +13,19 @@ public class Transportation {
 
     public void testExecute(Scanner scanner) {
 
-        Map<String, Integer> mapCities = new HashMap<>();
-
         System.out.println("Please, enter number of tests:");
         int tests = scanner.nextInt();
 
-        // The number of tests
+        // The number of tests <= 10
         new Validation().validateNumberOfTests(tests);
-        collectAllTests(scanner, mapCities, tests);
+        collectAllTests(scanner, tests);
     }
 
-    private void collectAllTests(Scanner scanner, Map<String, Integer> mapCities, int tests) {
+    private void collectAllTests(Scanner scanner, int tests) {
         logger.info("Program starts tests " + tests);
+
+        Map<String, Integer> mapCities = new HashMap<>();
+
         for (int k = 0; k < tests; k++) {
 
             // The number of cities <= 10000
@@ -48,12 +49,14 @@ public class Transportation {
         for (Node node : arrayList) {
             // Call Dijkstra's algorithm method
             Graph graph = new Graph(vertices);
-            graph.algorithmDijkstra(nestedNodes, node.node - 1);
+            graph.algorithmDijkstra(nestedNodes, node.getNode() - 1);
 
             // Print the shortest path from source node to all the nodes
             System.out.println("The shorted path from source city to destination city :");
             System.out.println("Source " + " Destination " + " Distance ");
-            System.out.println(node.node + " \t\t\t " + node.cost + " \t\t\t " + graph.dist[node.cost - 1]);
+            System.out.println(node.getNode() + " \t\t\t "
+                    + node.getCost() + " \t\t\t "
+                    + graph.distance[node.getCost() - 1]);
         }
     }
 
@@ -61,23 +64,24 @@ public class Transportation {
         System.out.println("Enter number of paths:");
         int path = scanner.nextInt();
         ArrayList<Node> arrayList = new ArrayList<>(path);
+
         for (int i = 0; i < path; i++) {
             arrayList.add(new Node(mapCities.get(scanner.next()), mapCities.get(scanner.next())));
         }
         return arrayList;
     }
 
-    private void collectCities(Scanner scanner, Map<String, Integer> mapCities, int vertices, List<List<Node>> nestedNodes) {
+    private void collectCities(Scanner scanner, Map<String, Integer> mapCities,
+                               int vertices, List<List<Node>> nestedNodes) {
         for (int i = 0; i < vertices; i++) {
-            List<Node> item = new ArrayList<>();
-            nestedNodes.add(item);
+            nestedNodes.add(new ArrayList<>());
 
             System.out.println("Enter name of city:");
-            String str = scanner.next();
-            new Validation().validateNameOfCity(str);
+            String city = scanner.next();
+            new Validation().validateNameOfCity(city);
 
             // Collect indexes of a cities connected to names (the index of the first city is 1)
-            mapCities.put(str, i + 1);
+            mapCities.put(city, i + 1);
 
             collectNeighbors(scanner, nestedNodes, i);
         }

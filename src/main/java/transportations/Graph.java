@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Graph {
 
-    int dist[];
+    int[] distance;
     Set<Integer> visited;
     PriorityQueue<Node> priorityQueue;
     int vertices;
@@ -15,7 +15,7 @@ public class Graph {
 
     public Graph(int vertices) {
         this.vertices = vertices;
-        dist = new int[vertices];
+        distance = new int[vertices];
         visited = new HashSet<>();
         priorityQueue = new PriorityQueue<>(vertices, new Node());
     }
@@ -26,17 +26,17 @@ public class Graph {
         this.nestedNodes = nestedNodes;
 
         for (int i = 0; i < vertices; i++) {
-            dist[i] = Integer.MAX_VALUE;
+            distance[i] = Integer.MAX_VALUE;
         }
         // First add source node to PriorityQueue
         priorityQueue.add(new Node(source, 0));
 
         // Distance to the source from itself is 0
-        dist[source] = 0;
+        distance[source] = 0;
         while (visited.size() != vertices) {
 
             // VisitedNode is removed from PriorityQueue and has min distance
-            int visitedNode = priorityQueue.remove().node;
+            int visitedNode = priorityQueue.remove().getNode();
 
             // Add node to finalized list as visited
             visited.add(visitedNode);
@@ -52,16 +52,16 @@ public class Graph {
             Node visitedNeighbor = nestedNodes.get(visitedNode).get(i);
 
             //  Proceed only if current node is not in visited
-            if (!visited.contains(visitedNeighbor.node)) {
-                int newDistance = dist[visitedNode] + visitedNeighbor.cost;
+            if (!visited.contains(visitedNeighbor.getNode())) {
+                int newDistance = distance[visitedNode] + visitedNeighbor.getCost();
 
                 // Compare distances
-                if (newDistance < dist[visitedNeighbor.node]) {
-                    dist[visitedNeighbor.node] = newDistance;
+                if (newDistance < distance[visitedNeighbor.getNode()]) {
+                    distance[visitedNeighbor.getNode()] = newDistance;
                 }
 
                 // Add the current vertex to the PriorityQueue
-                priorityQueue.add(new Node(visitedNeighbor.node, dist[visitedNeighbor.node]));
+                priorityQueue.add(new Node(visitedNeighbor.getNode(), distance[visitedNeighbor.getNode()]));
             }
         }
     }

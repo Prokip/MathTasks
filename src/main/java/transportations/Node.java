@@ -5,8 +5,8 @@ import java.util.Objects;
 
 class Node implements Comparator<Node> {
 
-    public int node;
-    public int cost;
+    private int node;
+    private int cost;
 
     public Node() {
     }
@@ -16,13 +16,25 @@ class Node implements Comparator<Node> {
         this.cost = cost;
     }
 
+    public int getNode() {
+        return node;
+    }
+
+    public void setNode(int node) {
+        this.node = node;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     @Override
     public int compare(Node node1, Node node2) {
-        if (node1.cost < node2.cost)
-            return -1;
-        if (node1.cost > node2.cost)
-            return 1;
-        return 0;
+        return Integer.compare(node1.cost, node2.cost);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package factorial;
 
-import exception.NumberException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +15,8 @@ public class SumDigitsFactorial {
         logger.info("Number to find factorial " + number);
         // Calculating the factorial
         while (number <= 2) {
-            logger.info("number must be positive and > 2");
-            throw new NumberException("Number must be positive and > 2");
+            logger.info("number must be positive and > 2" + number);
+            System.out.println("Number must be positive and > 2" + number);
         }
 
         // Initialize result

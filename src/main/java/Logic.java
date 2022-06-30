@@ -1,5 +1,4 @@
 import brackets.Parenthesis;
-import exception.NumberException;
 import factorial.SumDigitsFactorial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +21,11 @@ public class Logic {
 
             new Transportation().testExecute(scanner);
 
-            System.out.println(System.lineSeparator() + "Please, enter your number to find factorial:");
+            System.out.println(System.lineSeparator() + "Please, enter your number to find factorial : ");
 
-            System.out.print("SumDigitsFactorial is " + new SumDigitsFactorial().findSum(scanner.nextInt()));
+            System.out.print("SumDigitsFactorial is " + new SumDigitsFactorial().findSum(scanner.nextInt())
+                    + System.lineSeparator());
 
-        } catch (NumberException exception) {
-            logger.error("Program failed : ", exception);
-            System.out.println(exception.getMessage());
         } catch (Exception exception) {
             logger.error("Program failed : ", exception);
             System.out.println("Something went wrong");

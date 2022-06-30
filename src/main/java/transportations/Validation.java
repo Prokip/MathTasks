@@ -31,7 +31,7 @@ public class Validation {
     }
 
     public void validateNameOfCity(String str) {
-        while (!str.matches(REGEX) || str.length() > 10) {
+        if (!str.matches(REGEX) || str.length() > 10) {
             logger.info("it must be <= 10 char and contains only letters");
             throw new NumberException("The number of neighbors must be <= 100");
         }
